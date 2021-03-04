@@ -1,6 +1,8 @@
 package com.rafael.cursoMC.config;
 
 import com.rafael.cursoMC.services.DBService;
+import com.rafael.cursoMC.services.EmailService;
+import com.rafael.cursoMC.services.SMTPEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,5 +30,10 @@ public class DevConfig {
 
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new SMTPEmailService();
     }
 }
