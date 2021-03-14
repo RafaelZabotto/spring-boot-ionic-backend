@@ -1,6 +1,7 @@
 package com.rafael.cursoMC.config;
 
 import com.rafael.cursoMC.security.JWTAuthenticationFilter;
+import com.rafael.cursoMC.security.JWTAuthorizationFilter;
 import com.rafael.cursoMC.security.JWTUtil;
 import com.rafael.cursoMC.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
