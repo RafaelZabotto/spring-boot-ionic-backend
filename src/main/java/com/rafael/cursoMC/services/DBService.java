@@ -2,6 +2,7 @@ package com.rafael.cursoMC.services;
 
 import com.rafael.cursoMC.dominio.*;
 import com.rafael.cursoMC.dominio.enums.EstadoPagamento;
+import com.rafael.cursoMC.dominio.enums.Perfil;
 import com.rafael.cursoMC.dominio.enums.TipoCliente;
 import com.rafael.cursoMC.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,16 +111,22 @@ public class DBService {
 
         /*Endereços e Clientes*/
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "rafaelm.zabotto@gmail.com", "36521548796", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123456"));
-
+        Cliente cli1 = new Cliente(null, "Maria Silva", "rafael123@gmail.com", "36521548796", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123456"));
         cli1.getTelefones().addAll(Arrays.asList("33652148","996542138"));
+
+        Cliente cli2 = new Cliente(null, "Rafael Zabotto", "rafaelm.zabotto@gmail.com", "48718725058", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123456"));
+        cli2.getTelefones().addAll(Arrays.asList("33652147","998754126"));
+        cli2.addPerfil(Perfil.ADMIN);
+
 
         Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
         Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+        Endereco e3 = new Endereco(null, "Avenida San Charles", "541", null, "Centro", "1234567", cli2, c2);
 
         cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+        cli2.getEnderecos().addAll(Arrays.asList(e3));
 
-        clienteRepository.saveAll(Arrays.asList(cli1));
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2));
         enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
         /*Pedidos e Pagamentos*/
