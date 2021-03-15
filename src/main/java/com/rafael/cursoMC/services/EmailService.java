@@ -1,5 +1,6 @@
 package com.rafael.cursoMC.services;
 
+import com.rafael.cursoMC.dominio.Cliente;
 import com.rafael.cursoMC.dominio.Pedido;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -14,4 +15,6 @@ public interface EmailService {
     void sendOrderConfirmationHtmlEmail(Pedido obj);
 
     void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Cliente cliente, String newPass);
 }
