@@ -3,6 +3,9 @@ package com.rafael.cursoMC.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.rafael.cursoMC.dominio.enums.Perfil;
+import com.rafael.cursoMC.security.UserSS;
+import com.rafael.cursoMC.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -37,6 +40,13 @@ public class ClienteService {
 	
 
 	public Cliente find(Integer id) {
+
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw  new AuthorizationException("Acesso Negado");
+
+		}
+
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
