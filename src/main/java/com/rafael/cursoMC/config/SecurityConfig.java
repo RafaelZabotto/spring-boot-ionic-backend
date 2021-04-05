@@ -3,7 +3,6 @@ package com.rafael.cursoMC.config;
 import com.rafael.cursoMC.security.JWTAuthenticationFilter;
 import com.rafael.cursoMC.security.JWTAuthorizationFilter;
 import com.rafael.cursoMC.security.JWTUtil;
-import com.rafael.cursoMC.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
